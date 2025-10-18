@@ -1,7 +1,7 @@
 # Making a neural network in C++ (from scratch)
 
 ## What can it do?
-The neural can do basic regression between input and solution data. The neural network includes linear layers, ReLU, MSE. You can also combine any Tensors you want due to the dynamic compute graph, this will be explored in later sections. The code blocks are simplified versions.
+The neural can do basic regression between input and solution data. The neural network includes linear layers, ReLU, MSE. You can also combine any Tensors you want due to the dynamic compute graph, this will be explored in later sections.
 
 ### Overview of main part
 ```c++
