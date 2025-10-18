@@ -26,7 +26,7 @@ The neural can do basic regression between input and solution data. The neural n
 ```
 
 ## Example
-In this example I just to show the neural network works I input data: X = {{-1,2},{-3,4},{-2,1},{1,-3},{3,3}} and fit it to y = {{1},{2},{3},{4},{5}}. This X is 5 data points with each point having 2 features. We are going to train a neural network defined by: Linear(2,7),ReLU, Linear(7,20), ReLU, Linear(20,1). Where Linear(a,b) is a linear layer with a matrix of weights of size (a,b) with a bias being added of size (1,b). The picture below shows this neural network visually.
+In this example, just to show the neural network works, I input data: X = {{-1,2},{-3,4},{-2,1},{1,-3},{3,3}} and fit it to y = {{1},{2},{3},{4},{5}}. This X is 5 data points with each point having 2 features. We are going to train a neural network defined by: Linear(2,7),ReLU, Linear(7,20), ReLU, Linear(20,1). Where Linear(a,b) is a linear layer with a matrix of weights of size (a,b) with a bias being added of size (1,b). The picture below shows this neural network visually.
 
 <img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/1df9f5f8-3588-4f58-897e-c98d85287f9d" />
 
