@@ -6,12 +6,12 @@
 Linear::Linear(size_t input_layers, size_t output_layers) {
     std::vector<double>weightsData({});
     for (size_t i = 0; i < (input_layers * output_layers); i++) {
-        weightsData.push_back(static_cast<float>(std::rand()) / RAND_MAX - 1);
+        weightsData.push_back(static_cast<float>((double(std::rand()) / RAND_MAX) * 2.0 - 1.0));
    }
 
     std::vector<double>biasData({});
     for (size_t i = 0; i < (output_layers); i++) {
-        biasData.push_back(static_cast<float>(std::rand()) / RAND_MAX - 1);
+        biasData.push_back(static_cast<float>((double(std::rand()) / RAND_MAX) * 2.0 - 1.0));
    }
 
    weights = Tensor(weightsData,

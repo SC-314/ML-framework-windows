@@ -27,6 +27,14 @@ void Tensor::set_grad_fn(std::shared_ptr<GraphNode> node) {
     this->grad_fn = node;
 }
 
+Tensor Tensor::relu() {
+    return ReLU(*this);
+}
+
+Tensor Tensor::sum() {
+    return Sum(*this);
+}
+
 Tensor Tensor::operator+(Tensor& other) {
     return add(*this, other);
 }
@@ -48,8 +56,9 @@ Tensor Tensor::operator&(Tensor& other) {
 }
 
 void Tensor::backward(bool final) {
+
     if (final) {
-        grad = std::make_shared<std::vector<double>>(std::vector<double>(data->size(), 1.0));
+        grad = std::make_shared<std::vector<double>>(std::vector<double>(data->size(), 1.0 / ((*this->data).size())));
     }
 
     if (grad_fn != nullptr) {

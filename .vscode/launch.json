@@ -1,55 +1,31 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Debug ML Framework",
-      "type": "cppdbg",
-      "request": "launch",
-      "args": [],
-      "stopAtEntry": false,
-      "externalConsole": false,
-      "cwd": "/home/sam314/Personal/Programming/AI/ML Framework/Attempt 1",
-      "program": "/home/sam314/Personal/Programming/AI/ML Framework/Attempt 1/main",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
-      "preLaunchTask": "build",
-      "setupCommands": [
+    "version": "0.2.0",
+    "configurations": [
         {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        },
-        {
-          "description": "Set print elements to unlimited",
-          "text": "-gdb-set print elements 0",
-          "ignoreFailures": true
+            "name": "Debug ML Framework (MSYS2)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/c/Users/Sam/Desktop/ML-framework-windows/main.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "/c/Users/Sam/Desktop/ML-framework-windows",
+            "MIMode": "gdb",
+            "externalConsole": false,
+            "preLaunchTask": "build",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "pipeTransport": {
+                "pipeProgram": "C:\\msys64\\usr\\bin\\bash.exe",
+                "pipeArgs": ["-c"],
+                "pipeCwd": "",
+                "debuggerPath": "/mingw64/bin/gdb.exe",
+                "quoteArgs": true
+            }
         }
-      ],
-      "environment": [
-        {
-          "name": "LD_LIBRARY_PATH",
-          "value": "/opt/libtorch/lib:${env:LD_LIBRARY_PATH}"
-        }
-      ]
-    },
-    {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "cppdbg",
-      "request": "launch",
-      "args": [],
-      "stopAtEntry": false,
-      "externalConsole": false,
-      "cwd": "/home/sam314/Personal/Programming/AI/ML Framework/Attempt 1",
-      "program": "/home/sam314/Personal/Programming/AI/ML Framework/Attempt 1/build/Debug/outDebug",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        }
-      ]
-    }
-  ]
+    ]
 }

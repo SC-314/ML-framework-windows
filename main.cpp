@@ -12,39 +12,53 @@ int main() {
         Linear fc3{};
         Tensor IM1;
         Tensor IM2;
+        Tensor IM3;
+        Tensor IM4;
         Net() : fc1(2, 5), fc2(5,20), fc3(20, 1) {
             register_module("fc1", fc1);
             register_module("fc2", fc2);
             register_module("fc3", fc3);
         }
         Tensor forward(Tensor& x) {
-            Tensor C = fc1(x);
-            this->IM1 = C;
-            this->IM1.data = C.data; // it didmt fix the data notbinmg in iter
-            this->IM1.grad_fn = C.grad_fn;
-            this->IM1.grad = C.grad;
+            Tensor A = fc1(x);
+            this->IM1 = A;
+            this->IM1.data = A.data; // it didnt fix the data not being in iter
+            this->IM1.grad_fn = A.grad_fn;
+            this->IM1.grad = A.grad;
 
-            Tensor D = fc2(IM1);
-            this->IM2 = D;
-            this->IM2.data = D.data;
-            this->IM2.grad_fn = D.grad_fn;
-            this->IM2.grad = D.grad;
+            Tensor Arelu = IM1.relu();
+            this->IM2 = Arelu;
+            this->IM2.data = Arelu.data;
+            this->IM2.grad_fn = Arelu.grad_fn;
+            this->IM2.grad = Arelu.grad;
 
-            return fc3(IM2);
+            Tensor B = fc2(IM2);
+            this->IM3 = B;
+            this->IM3.data = B.data;
+            this->IM3.grad_fn = B.grad_fn;
+            this->IM3.grad = B.grad;
+
+            Tensor Brelu = IM3.relu();
+            this->IM4 = Brelu;
+            this->IM4.data = Brelu.data;
+            this->IM4.grad_fn = Brelu.grad_fn;
+            this->IM4.grad = Brelu.grad;
+
+            return fc3(IM4);
         }
     };
     Net network;
-    Optim::SGD optimizer(0.000001, network.parameters());
-    Tensor A = Tensor(std::vector<double>({1,2,3,4,5,6,7,3,3,3}), std::vector<size_t>({5,2}), std::vector<size_t>({2,1}));
-    Tensor y = Tensor(std::vector<double>({1,1,1,1,1}), std::vector<size_t>({5,1}), std::vector<size_t>({1,1}));
+    Optim::SGD optimizer(0.001, network.parameters());
+    Tensor A = Tensor(std::vector<double>({-1,2,-3,4,-2,1,1,-3,3,3}), std::vector<size_t>({5,2}), std::vector<size_t>({2,1}));
+    Tensor y = Tensor(std::vector<double>({1,2,3,4,5}), std::vector<size_t>({5,1}), std::vector<size_t>({1,1}));
 
-
-    for (int i = 0; i < 10000; i++) {
+    for (int i = 0; i < 100; i++) {
         Tensor B = network.forward(A);
         auto loss = MseLoss(B, y);
         loss.backward();
-        optimizer.apply_grads();
         std::cout << B << std::endl;
+        optimizer.apply_grads();
         optimizer.zero_grads();
     }
+
 }

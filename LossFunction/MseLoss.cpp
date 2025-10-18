@@ -12,6 +12,19 @@ MseLoss::MseLoss(Tensor& A, Tensor& B) {
     this->IM2.data = im2.data;
     this->IM2.grad_fn = im2.grad_fn;
     this->IM2.grad = im2.grad;
+
+    Tensor im3 = IM2.sum();
+    this->IM3 = im3;
+    this->IM3.data = im3.data;
+    this->IM3.grad_fn = im3.grad_fn;
+    this->IM3.grad = im3.grad;
+
+    Tensor n = Tensor(std::vector<double>({(*A.data).size()}), std::vector<size_t>({1}), std::vector<size_t>({1}));
+    this->N = n;
+    this->N.data = n.data;
+    this->N.grad_fn = n.grad_fn;
+    this->N.grad = n.grad;
+
 }
 
 void MseLoss::backward() {

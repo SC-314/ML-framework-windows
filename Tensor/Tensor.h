@@ -26,6 +26,8 @@ public:
     Tensor operator*(Tensor& other);
     Tensor operator/(Tensor& other);
     Tensor operator&(Tensor& other);
+    Tensor relu();
+    Tensor sum();
     
     void backward(bool final = false);
 
@@ -36,3 +38,5 @@ public:
 
 #include "../BinaryOps/BinaryOps.h"
 #include "../MatMulOp/MatMul.h"
+#include "../SingleOps/SingleOps.h"
+#include "../ReductionOps/ReductionOps.h"

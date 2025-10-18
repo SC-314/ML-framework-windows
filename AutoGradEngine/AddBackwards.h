@@ -38,3 +38,17 @@ public:
     void backward(std::shared_ptr<std::vector<double>> grad_output, std::vector<size_t> shape, std::vector<size_t> stride) override;
     void save_for_backward(std::vector<std::reference_wrapper<Tensor>> save_tensors_) override; // here
 };
+
+class ReLUBackward : public GraphNode {
+public:
+    std::vector<std::reference_wrapper<Tensor>> save_tensors_; // here
+    void backward(std::shared_ptr<std::vector<double>> grad_output, std::vector<size_t> shape, std::vector<size_t> stride) override;
+    void save_for_backward(std::vector<std::reference_wrapper<Tensor>> save_tensors_) override; // here
+};
+
+class SumBackward : public GraphNode {
+public:
+    std::vector<std::reference_wrapper<Tensor>> save_tensors_; // here
+    void backward(std::shared_ptr<std::vector<double>> grad_output, std::vector<size_t> shape, std::vector<size_t> stride) override;
+    void save_for_backward(std::vector<std::reference_wrapper<Tensor>> save_tensors_) override; // here
+};

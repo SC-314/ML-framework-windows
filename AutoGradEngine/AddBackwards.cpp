@@ -180,6 +180,7 @@ void DivBackward::backward(std::shared_ptr<std::vector<double>> grad_output, std
         [](double a, double b) -> double { return -a/(b * b); });
     
     for (Tensor& A : save_tensors_) {
+        std::cout << "HOOO";
         A.backward(false);
     }
 
