@@ -1,0 +1,40 @@
+void MulBackward::backward(std::shared_ptr<std::vector<double>> grad_output, std::vector<size_t> shape, std::vector<size_t> stride) { // grad_output is the gradient inputted into the function
+    std::cout << "MUL HAS BEEN CALLED" << std::endl;
+
+    Tensor& A = save_tensors_[0];
+    Tensor& B = save_tensors_[1];
+    ElemWiseIterator::ElemWiseIteratorConfig config_gradA(
+        [](double a, double b) -> double { return a * b; }
+    );
+    config_gradA.add_input(B);
+    config_gradA.add_input(Tensor(std::vector<double>(*grad_output), shape, stride));
+
+    ElemWiseIterator iter_gradA = config_gradA.build();
+    Tensor result_gradA = iter_gradA.for_each();
+
+    std::vector<size_t> targetShape_gradA = A.shape;
+    std::vector<double> grad_output_gradA = *result_gradA.data;
+
+    std::vector<double> output_gradA = sum_to_shape(grad_output_gradA, targetShape_gradA, result_gradA.shape, result_gradA.strides);
+    A.grad = std::make_shared<std::vector<double>>(output_gradA);
+    A.backward();
+
+
+
+    ElemWiseIterator::ElemWiseIteratorConfig config_gradB(
+        [](double a, double b) -> double { return a * b; }
+    );
+    config_gradB.add_input(A);
+    config_gradB.add_input(Tensor(std::vector<double>(*grad_output), shape, stride));
+
+    ElemWiseIterator iter_gradB = config_gradB.build();
+    Tensor result_gradB = iter_gradB.for_each();
+
+    std::vector<size_t> targetShape_gradB = B.shape;
+    std::vector<double> grad_output_gradB = *result_gradB.data;
+
+    std::vector<double> output_gradB = sum_to_shape(grad_output_gradB, targetShape_gradB, result_gradB.shape, result_gradB.strides);
+    B.grad = std::make_shared<std::vector<double>>(output_gradB);
+    B.backward();
+
+}

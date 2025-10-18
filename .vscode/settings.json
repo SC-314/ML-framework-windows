@@ -1,0 +1,30 @@
+{
+  "terminal.integrated.profiles.windows": {
+    "MSYS2 MinGW64": {
+      "path": "C:\\msys64\\usr\\bin\\bash.exe",
+      "args": ["--login", "-i"],
+      "env": {
+        "MSYSTEM": "MINGW64",
+        "CHERE_INVOKING": "1"
+      },
+      "icon": "terminal-bash"
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "MSYS2 MinGW64",
+
+  "code-runner.executorMap": {
+    "cpp": "make && make run"
+  },
+  "code-runner.runInTerminal": true,
+  "code-runner.executorMapByFileExtension": {
+    ".cpp": "make && make run"
+  },
+  "code-runner.executorMapByGlob": {
+    "**/*.cpp": "make && make run"
+  },
+  "code-runner.runInOutputWindow": false,
+  "code-runner.saveFileBeforeRun": true,
+  "code-runner.executorMapTerminal": {
+    "cpp": "bash"
+  }
+}

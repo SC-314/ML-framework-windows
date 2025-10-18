@@ -1,0 +1,2 @@
+i tried the optim class but had issues with where i was going to define the class because
+that would accect how the  gradients are initialised
